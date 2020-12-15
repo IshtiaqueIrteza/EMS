@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="/common/layout/base">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .err_msg {
+            color: red;
+        }
+    </style>
+</head>
+
+<body layout:fragment="content">
+
+<div class="container">
+    <div class="x_panel">
+        <br><br>
+        <div class="form-group row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-6">
+                <label><h3>Process Initial Employees Salary</h3></label>
+            </div>
+        </div><br><br>
+
+        <form action="/employees/init-sal-calc" method="post">
+
+            <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <label for="lowest_grade_basic" class="col-sm-3 col-form-label"><h5>Grade 6 Employee Basic<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="lowest_grade_basic"
+                           name="lowest_grade_basic" placeholder="Input Lowest Grade Basic">
+                    <span class="err_msg" id="err_lowest_grade_basic"></span>
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" class="btn btn-success">
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+
+<!--Script-->
+<div layout:fragment="script">
+<!--    <script src="/js/security/role_group_map_with_org.js"></script>-->
+</div>
+
+<div layout:fragment="css">
+
+</div>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="/common/layout/base">
+<head>
+</head>
+
+<body layout:fragment="content">
+
+<div class="container">
+    <div id="scroll" class="">
+        <div class="x_panel">
+
+            <div class="form-group row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-5">
+                    <br><label><h3>Welcome To IBCS-PRIMAX</h3></label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-7">
+                    <br><label><h3 style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;Employee Management System</h3></label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-5">
+                    <br><br><label style="color: green">Go To: -> </label> <button onclick="window.location.href='employees/init-sal-calc'" class="btn btn-sm btn-info">Initial Salary Calculation Process</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+<!--Script-->
+<div layout:fragment="script">
+<!--    <script src="/js/security/office_wise_organogram_setup.js"></script>-->
+</div>
+
+<div layout:fragment="css">
+
+</div>
+
+</html>

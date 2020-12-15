@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+        <head>
+            <!-- CSS -->
+            <div th:replace="common/layout/header :: header"></div>
+            <title>EMS: IBCS-PRIMAX</title>
+        </head>
+        <body>
+            <!-- page content -->
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="right_col" role="main">
+
+                    <div layout:fragment="content">
+                        <!-- Page content goes here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- scripts -->
+            <!-- jQuery -->
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <!-- jQuery Confirm -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+            <script src="/js/plugins/jquery-confirm-custom.js"></script>
+            <!-- Bootstrap -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+            <!-- Datatables -->
+            <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+            <!-- PNotify -->
+            <script src="/js/plugins/pnotify/dist/pnotify.js"></script>
+            <script src="/js/plugins/pnotify/dist/pnotify.buttons.js"></script>
+            <script src="/js/plugins/pnotify/dist/pnotify.nonblock.js"></script>
+
+            <div layout:fragment="script"></div>
+
+        </body>
