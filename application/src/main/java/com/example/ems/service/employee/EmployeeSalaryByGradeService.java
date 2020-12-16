@@ -1,6 +1,6 @@
-package com.example.ems.service;
+package com.example.ems.service.employee;
 
-import com.example.ems.model.EmployeeSalaryByGrade;
+import com.example.ems.model.employee.EmployeeSalaryByGrade;
 
 import java.util.List;
 

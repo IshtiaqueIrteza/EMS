@@ -1,4 +1,4 @@
-package com.example.ems.model;
+package com.example.ems.model.employee;
 
 import lombok.Data;
 
@@ -13,10 +13,6 @@ public class EmployeeBankAccInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-
-    /*@OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "", referencedColumnName = "", foreignKey = "")
-    private Employee employee;*/
 
     @Column(name = "ACC_NAME")
     private String accName;
@@ -35,5 +31,8 @@ public class EmployeeBankAccInfo {
 
     @Column(name = "CUR_BAL")
     private double curBalance;
+
+    @Column(name = "EMP_ID")
+    private Integer empId;
 
 }

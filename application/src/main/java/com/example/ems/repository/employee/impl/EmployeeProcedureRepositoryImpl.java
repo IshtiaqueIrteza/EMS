@@ -1,6 +1,6 @@
-package com.example.ems.repository.impl;
+package com.example.ems.repository.employee.impl;
 
-import com.example.ems.repository.EmployeeProcedureRepository;
+import com.example.ems.repository.employee.EmployeeProcedureRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

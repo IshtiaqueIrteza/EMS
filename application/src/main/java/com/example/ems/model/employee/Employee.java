@@ -1,4 +1,4 @@
-package com.example.ems.model;
+package com.example.ems.model.employee;
 
 import lombok.Data;
 
@@ -15,14 +15,14 @@ public class Employee {
     private Long id;
 
     @Column(name = "EMP_ID")
-    private int empId;
+    private Integer empId;
 
     @Column(name = "EMP_NAME")
     private String empName;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "GRADE", referencedColumnName = "GRADE_ID", insertable = false, updatable = false)
-    private EmployeeSalaryByGrade salary;
+    private EmployeeSalaryByGrade employeeSalaryByGrade; // fetch salary
 
     @Column(name = "GRADE")
     private char grade;

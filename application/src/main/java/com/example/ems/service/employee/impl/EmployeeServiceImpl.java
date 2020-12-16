@@ -1,8 +1,8 @@
-package com.example.ems.service.impl;
+package com.example.ems.service.employee.impl;
 
-import com.example.ems.model.Employee;
-import com.example.ems.repository.EmployeeRepository;
-import com.example.ems.service.EmployeeService;
+import com.example.ems.model.employee.Employee;
+import com.example.ems.repository.employee.EmployeeRepository;
+import com.example.ems.service.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +27,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(Employee employee) {
-        return this.employeeRepository.save(employee);
+    public int addNewEmployee(Employee employee) {
+        try{
+            Integer maxEmpId = this.employeeRepository.getMaxEmpId();
+            employee.setEmpId(maxEmpId == null ? 1001 : maxEmpId + 1);
+            return this.employeeRepository.save(employee).getEmpId(); //return emp id
+        }
+        catch (Exception ex){
+            return 0;
+        }
     }
 
     @Override

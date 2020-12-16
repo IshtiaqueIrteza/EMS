@@ -1,8 +1,8 @@
-package com.example.ems.service.impl;
+package com.example.ems.service.employee.impl;
 
-import com.example.ems.model.EmployeeSalaryByGrade;
-import com.example.ems.repository.EmployeeSalaryByGradeRepository;
-import com.example.ems.service.EmployeeSalaryByGradeService;
+import com.example.ems.model.employee.EmployeeSalaryByGrade;
+import com.example.ems.repository.employee.EmployeeSalaryByGradeRepository;
+import com.example.ems.service.employee.EmployeeSalaryByGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

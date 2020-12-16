@@ -1,4 +1,4 @@
-package com.example.ems.model;
+package com.example.ems.model.company;
 
 import lombok.Data;
 

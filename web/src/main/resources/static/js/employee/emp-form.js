@@ -4,7 +4,11 @@ $(document).ready(function () {
         e.target.value = e.target.value.replace(/[^0-9]/g,'');
     });
 
-    function validate(){
+    $(document).on('input', '#acc_num', function(e){
+        e.target.value = e.target.value.replace(/[^0-9]/g,'');
+    });
+
+    function validateEmpMaster(){
 
         $(".err_msg").text("");
 
@@ -37,11 +41,41 @@ $(document).ready(function () {
         return true;
     }
 
+    function validateEmpDtl(){
+
+        $(".err_msg").text("");
+
+        if($.trim($("#bank_nm").val()) == ""){
+            $("#err_bank_nm").text("Required !!");
+            return false;
+        }
+
+        if($("#br_nm").val() == ""){
+            $("#err_br_nm").text("Required !!");
+            return false;
+        }
+
+        if($.trim($("#acc_name").val()) == ""){
+            $("#err_acc_name").text("Required !!");
+            return false;
+        }
+
+        if($.trim($("#acc_num").val()) == ""){
+            $("#err_acc_num").text("Required !!");
+            return false;
+        }
+
+        if($("#acc_tp").val() == "-1"){
+            $("#err_acc_tp").text("Required !!");
+            return false;
+        }
+
+        return true;
+    }
+
     $(document).on("click", "#save_emp_btn", function () {
 
-        if(validate()){
-
-            $("#err_lowest_grade_basic").text("");
+        if(validateEmpMaster()){
 
             $.confirm({
                 title: 'Confirm',
@@ -49,19 +83,73 @@ $(document).ready(function () {
                 buttons: {
                     ok: function () {
 
+                        let empBasicInfo = {};
+                        empBasicInfo.empName = $.trim($("#emp_nm").val());
+                        empBasicInfo.grade = $.trim($("#emp_grade").val());
+                        empBasicInfo.address = $.trim($("#emp_add").val());
+                        empBasicInfo.mobile = $.trim($("#emp_mb").val());
+
                         $.ajax({
-                            url:  "init-sal-calc",
+                            contentType: 'application/json',
+                            url:  "/api/employees",
                             type: 'POST',
-                            data: {
-                                basic: $.trim($("#lowest_grade_basic").val())
-                            },
+                            data: JSON.stringify(empBasicInfo),
                             dataType: 'json',
                             success: function(response) {
 
-                                if(response == "1"){
-                                    showAlertByType("Salary calculation processed successfully", 'S');
+                                if(response != 0){
+                                    $("#emp_id").val(response);
+                                    $("#basic_info_div :input").prop('disabled',true);
+                                    $("#display_emp_id").text(response);
+                                    $("#acc_info_div").show();
+                                    showAlertByType("Employee added successfully", 'S');
+                                }
+                                else{
+                                    showAlertByType("Something went wrong ! Please try again", 'F');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                showAlertByType("Something went wrong !!", 'F');
+                            }
+                        });
+
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+        }
+    });
+
+    $(document).on("click", "#save_dtl_btn", function () {
+
+        if(validateEmpDtl()){
+
+            $.confirm({
+                title: 'Confirm',
+                content: 'Are you sure?',
+                buttons: {
+                    ok: function () {
+
+                        let empAccInfo = {};
+                        empAccInfo.accName = $.trim($("#acc_name").val());
+                        empAccInfo.accNum = $.trim($("#acc_num").val());
+                        empAccInfo.accType = $.trim($("#acc_tp").val());
+                        empAccInfo.bankName = $.trim($("#bank_nm").val());
+                        empAccInfo.branchName = $.trim($("#br_nm").val());
+
+                        $.ajax({
+                            contentType: 'application/json',
+                            url:  "/api/employees/" + $.trim($("#emp_id").val()) + "/details",
+                            type: 'POST',
+                            data: JSON.stringify(empAccInfo),
+                            dataType: 'json',
+                            success: function(response) {
+
+                                if(response != '0'){
+                                    showAlertByType("Employee bank info added successfully", 'S');
                                     setTimeout(function () {
-                                        window.location.href = "/employees/grade-salary-sheet";
+                                        window.location.reload();
                                     }, 1500);
                                 }
                                 else{

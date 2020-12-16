@@ -1,7 +1,7 @@
-package com.example.ems.service.impl;
+package com.example.ems.service.employee.impl;
 
-import com.example.ems.repository.EmployeeProcedureRepository;
-import com.example.ems.service.EMSProcessService;
+import com.example.ems.repository.employee.EmployeeProcedureRepository;
+import com.example.ems.service.employee.EMSProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
