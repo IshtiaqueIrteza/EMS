@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="/common/layout/base">
+<head>
+    <style>
+        .err_msg {
+            color: red;
+        }
+    </style>
+</head>
+
+<body layout:fragment="content">
+
+<div class="container">
+    <div class="x_panel">
+        <br>
+        <div class="form-group row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-6">
+                <label><h3>Employee Information</h3></label>
+            </div>
+        </div><br>
+
+        <div class="form-group row">
+<!--            <div class="col-sm-1"></div>-->
+            <label for="emp_nm" class="col-sm-2 col-form-label"><h5>Employee Name<span class="err_msg"> *</span></h5></label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control col-sm-5" id="emp_nm"
+                       placeholder="Name">
+                <span class="err_msg" id="err_emp_nm"></span>
+            </div>
+            <div class="col-sm-1"></div>
+            <label for="emp_grade" class="col-sm-2 col-form-label"><h5>Grade<span class="err_msg"> *</span></h5></label>
+            <div class="col-sm-2">
+                <select class="form-control" name="" id="emp_grade">
+                    <option value="-1">-- Select Grade --</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <span class="err_msg" id="err_emp_grade"></span>
+            </div>
+        </div><br>
+
+        <div class="form-group row">
+            <!--            <div class="col-sm-1"></div>-->
+            <label for="emp_add" class="col-sm-2 col-form-label"><h5>Address<span class="err_msg"> *</span></h5></label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control col-sm-5" id="emp_add"
+                       placeholder="Address">
+                <span class="err_msg" id="err_emp_add"></span>
+            </div>
+            <div class="col-sm-1"></div>
+            <label for="emp_mb" class="col-sm-2 col-form-label"><h5>Mobile<span class="err_msg"> *</span></h5></label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control col-sm-5" id="emp_mb"
+                       placeholder="ex: 01784556312">
+                <span class="err_msg" id="err_emp_mb"></span>
+            </div>
+        </div><br>
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <button id="save_emp_btn" class="btn btn-success">Save</button>
+            </div>
+        </div>
+
+        <div id="emp_acc_dtl" style="display: none">
+            <br>
+            <div class="form-group row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-6">
+                    <label><h3>Employee Detail [Bank Account]</h3> <h4 id="display_emp_id"></h4></label>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <!--            <div class="col-sm-1"></div>-->
+                <label for="bank_nm" class="col-sm-2 col-form-label"><h5>Bank Name<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="bank_nm"
+                           placeholder="Bank">
+                    <span class="err_msg" id="err_bank_nm"></span>
+                </div>
+                <div class="col-sm-1"></div>
+                <label for="br_nm" class="col-sm-3 col-form-label"><h5>Branch Name<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="br_nm"
+                           placeholder="Branch">
+                    <span class="err_msg" id="err_br_nm"></span>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <!--            <div class="col-sm-1"></div>-->
+                <label for="acc_name" class="col-sm-2 col-form-label"><h5>Account Name<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="acc_name"
+                           placeholder="Account Name">
+                    <span class="err_msg" id="err_acc_name"></span>
+                </div>
+                <div class="col-sm-1"></div>
+                <label for="acc_num" class="col-sm-3 col-form-label"><h5>Account Number<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="acc_num"
+                           placeholder="Account Number">
+                    <span class="err_msg" id="err_acc_num"></span>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label for="acc_tp" class="col-sm-2 col-form-label"><h5>Account Type<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="" id="acc_tp">
+                        <option value="-1">-- Select Type --</option>
+                        <option value="0">Current</option>
+                        <option value="1">Savings</option>
+                    </select>
+                    <span class="err_msg" id="err_acc_tp"></span>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <button id="save_dtl_btn" class="btn btn-success">Save</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+<!--Script-->
+<div layout:fragment="script">
+    <script src="/js/employee/emp-form.js"></script>
+</div>
+
+<div layout:fragment="css">
+
+</div>
+
+</html>

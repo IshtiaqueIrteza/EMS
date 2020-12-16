@@ -1,18 +1,24 @@
 package com.example.ems.controller;
 
-import com.example.ems.service.EmployeeService;
+import com.example.ems.model.EmployeeSalaryByGrade;
+import com.example.ems.service.EmployeeSalaryByGradeService;
+import com.example.ems.service.EMSProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/employees")
 public class EMSController {
 
     @Autowired
-    EmployeeService employeeService;
+    EMSProcessService employeeService;
+
+    @Autowired
+    EmployeeSalaryByGradeService employeeSalaryByGradeService;
 
     @GetMapping("/init-sal-calc")
     public String initialSalaryCalculation(){
@@ -20,21 +26,21 @@ public class EMSController {
     }
 
     @PostMapping("/init-sal-calc")
-    public String initialSalaryCalculationProcess(@RequestParam("lowest_grade_basic") int lowestGradeBasic,
-                                                  RedirectAttributes redirectAttributes, BindingResult bindingResult){
-        String res = employeeService.processInitialSalary(lowestGradeBasic);
-        if(res.equals('1')){
-            redirectAttributes.addFlashAttribute("msg", "Salary calculation processed successfully");
-            return "redirect:/employee/salary-sheet";
-        }
-        else{
-            redirectAttributes.addFlashAttribute("msg", "Salary calculation processed successfully");
-            return "redirect:/employee/salary-sheet";
-        }
+    @ResponseBody
+    public String initialSalaryCalculationProcess(@RequestParam("basic") int lowestGradeBasic){
+        return employeeService.processInitialSalary(lowestGradeBasic);
     }
 
-    @GetMapping("/salary-sheet")
-    public String employeeSalarySheet(){
-        return "/employee/init-sal-calc-form";
+    @GetMapping("/grade-salary-sheet")
+    public String employeeSalarySheet(Model model){
+        List<EmployeeSalaryByGrade> list = this.employeeSalaryByGradeService.getList();
+        model.addAttribute("list", list);
+        return "/employee/salary-sheet-by-grade";
     }
+
+    @GetMapping("/emp-form")
+    public String employeeForm(){
+        return "/employee/emp-form";
+    }
+
 }

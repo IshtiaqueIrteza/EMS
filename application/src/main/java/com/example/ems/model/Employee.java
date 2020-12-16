@@ -20,6 +20,10 @@ public class Employee {
     @Column(name = "EMP_NAME")
     private String empName;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "GRADE", referencedColumnName = "GRADE_ID", insertable = false, updatable = false)
+    private EmployeeSalaryByGrade salary;
+
     @Column(name = "GRADE")
     private char grade;
 

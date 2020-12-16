@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="/common/layout/base">
 <head>
-    <meta charset="UTF-8">
     <style>
         .err_msg {
             color: red;
@@ -23,22 +22,25 @@
             </div>
         </div><br><br>
 
-        <form action="/employees/init-sal-calc" method="post">
-
-            <div class="form-group row">
-                <div class="col-sm-2"></div>
-                <label for="lowest_grade_basic" class="col-sm-3 col-form-label"><h5>Grade 6 Employee Basic<span class="err_msg"> *</span></h5></label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control col-sm-5" id="lowest_grade_basic"
-                           name="lowest_grade_basic" placeholder="Input Lowest Grade Basic">
-                    <span class="err_msg" id="err_lowest_grade_basic"></span>
-                </div>
-                <div class="col-sm-3">
-                    <input type="submit" class="btn btn-success">
-                </div>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <label for="lowest_grade_basic" class="col-sm-3 col-form-label"><h5>Grade 6 Employee Basic<span class="err_msg"> *</span></h5></label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control col-sm-5" id="lowest_grade_basic"
+                       name="lowestGradeBasic" placeholder="Input Lowest Grade Basic">
+                <span class="err_msg" id="err_lowest_grade_basic"></span>
             </div>
+            <div class="col-sm-3">
+                <button id="process_btn" class="btn btn-success">Process</button>
+            </div>
+        </div>
 
-        </form>
+        <div class="form-group row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-5">
+                <br><br><label style="color: black"><b> OR: - ></b> </label> <button onclick="window.location.href='/employees/grade-salary-sheet'" class="btn btn-sm btn-primary">View Employee Salary By Grade</button>
+            </div>
+        </div>
 
     </div>
 </div>
@@ -47,7 +49,7 @@
 
 <!--Script-->
 <div layout:fragment="script">
-<!--    <script src="/js/security/role_group_map_with_org.js"></script>-->
+    <script src="/js/employee/init-sal-calc-form.js"></script>
 </div>
 
 <div layout:fragment="css">

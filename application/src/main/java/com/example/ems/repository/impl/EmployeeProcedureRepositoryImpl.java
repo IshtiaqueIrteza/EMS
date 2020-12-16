@@ -28,6 +28,6 @@ public class EmployeeProcedureRepositoryImpl implements EmployeeProcedureReposit
 
         String result = query.getSingleResult().toString();
 
-        return result.equals("1") ? "Salary calculation processed successfully" : "Something went wrong ! Please try again later";
+        return result;
     }
 }
