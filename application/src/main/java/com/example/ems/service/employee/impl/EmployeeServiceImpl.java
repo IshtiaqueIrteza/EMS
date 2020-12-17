@@ -3,6 +3,7 @@ package com.example.ems.service.employee.impl;
 import com.example.ems.model.employee.Employee;
 import com.example.ems.repository.employee.EmployeeRepository;
 import com.example.ems.service.employee.EmployeeService;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeRepository employeeRepository;
 
     @Override
-    public List<Employee> getEmployees() {
-        return this.employeeRepository.findAll();
+    public JSONObject getEmployees() {
+        List<Employee> employees = this.employeeRepository.findAll();
+        int empAggregateSalary = 0;
+        int employeeCount = 0;
+
+        for (Employee employee : employees) {
+            empAggregateSalary += employee.getEmployeeSalaryByGrade().getSalary();
+            employeeCount++;
+        }
+
+        JSONObject obj = new JSONObject();
+        obj.put("totalEmployee", employeeCount);
+        obj.put("empAggregateSalary", empAggregateSalary);
+        obj.put("employeeList", employees);
+
+        return obj;
     }
 
     @Override

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="/common/layout/base">
+<head>
+    <style>
+        .err_msg {
+            color: red;
+        }
+    </style>
+</head>
+
+<body layout:fragment="content">
+
+<div class="container">
+    <div class="x_panel">
+        <br>
+
+        <div id="c_bank_acc_info_div">
+            <br>
+            <div class="form-group row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                    <label><h3>Company Bank Account Detail</h3></label><br>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <!--            <div class="col-sm-1"></div>-->
+                <label for="bank_nm" class="col-sm-2 col-form-label"><h5>Bank Name<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="bank_nm"
+                           placeholder="Bank" th:value="${companyBankInfo.bankName}">
+                    <span class="err_msg" id="err_bank_nm"></span>
+                </div>
+                <div class="col-sm-1"></div>
+                <label for="br_nm" class="col-sm-3 col-form-label"><h5>Branch Name<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="br_nm"
+                           placeholder="Branch" th:value="${companyBankInfo.branchName}">
+                    <span class="err_msg" id="err_br_nm"></span>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <!--            <div class="col-sm-1"></div>-->
+                <label for="acc_name" class="col-sm-2 col-form-label"><h5>Account Name<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="acc_name"
+                           placeholder="Account Name" th:value="${companyBankInfo.accName}">
+                    <span class="err_msg" id="err_acc_name"></span>
+                </div>
+                <div class="col-sm-1"></div>
+                <label for="acc_num" class="col-sm-3 col-form-label"><h5>Account Number<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="acc_num"
+                           placeholder="Account Number" th:value="${companyBankInfo.accNum}">
+                    <span class="err_msg" id="err_acc_num"></span>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label for="acc_tp" class="col-sm-2 col-form-label"><h5>Account Type<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-2">
+                    <select class="form-control" name="" id="acc_tp" th:selected="${companyBankInfo.accType}">
+                        <option value="-1">-- Select Type --</option>
+                        <option value="0" selected>Current</option>
+                        <option value="1">Savings</option>
+                    </select>
+                    <span class="err_msg" id="err_acc_tp"></span>
+                </div>
+            </div><br>
+
+        </div>
+
+        <form action="/company-utility/update-company-acc-bal" method="post">
+            <div class="form-group row">
+                <label for="cur_bal" class="col-sm-2 col-form-label"><h5 style="color: green">Current Balance<span class="err_msg"> *</span></h5></label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control col-sm-5" id="cur_bal" name="bal-to-credit"
+                           placeholder="" th:value="${companyBankInfo.curBalance}" required>
+<!--                    <span class="err_msg" id="err_cur_bal"></span>-->
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <input type="submit" class="btn btn-success" value="Update">
+                </div>
+            </div><br>
+        </form>
+
+        <div class="form-group row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8">
+                <a class="btn btn-link" href="/company-utility/salary-disburse" target="_blank">Go To Disburse Salary Process Form</a>
+            </div>
+        </div><br>
+
+    </div>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var message = /*[[${message}]]*/ 'default';
+    // console.log(message);
+
+    /*]]>*/
+</script>
+
+</body>
+
+<!--Script-->
+<div layout:fragment="script">
+    <script src="/js/company/company-bank-acc-info.js"></script>
+</div>
+
+<div layout:fragment="css">
+
+</div>
+
+</html>

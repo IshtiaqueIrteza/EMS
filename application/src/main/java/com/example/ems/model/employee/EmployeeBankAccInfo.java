@@ -18,7 +18,7 @@ public class EmployeeBankAccInfo {
     private String accName;
 
     @Column(name = "ACC_NUM")
-    private int accNum;
+    private String accNum;
 
     @Column(name = "ACC_TYPE")
     private char accType;

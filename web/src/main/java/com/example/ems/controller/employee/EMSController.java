@@ -49,7 +49,7 @@ public class EMSController {
 
     @GetMapping("/emp-salary-sheet")
     public String employeeSalarySheet(Model model){
-        model.addAttribute("employees", this.employeeService.getEmployees());
+        model.addAttribute("employees", this.employeeService.getEmployees().get("employeeList"));
         return "/employee/emp-salary-sheet";
     }
 

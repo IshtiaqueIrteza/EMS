@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class CompanyBankAccInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) //only one bank acc, hardcoded
     @Column(name = "ACC_ID")
     private Long accId;
 
@@ -18,7 +18,7 @@ public class CompanyBankAccInfo {
     private String accName;
 
     @Column(name = "ACC_NUM")
-    private int accNum;
+    private String accNum;
 
     @Column(name = "ACC_TYPE")
     private char accType;
