@@ -6,10 +6,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -42,11 +39,17 @@ public class CompanyUtilityController {
 
     @GetMapping("/salary-disburse")
     public String salaryDisbursementProcessForm(Model model){
-        JSONObject obj = this.employeeService.getEmployees();
+        JSONObject obj = this.employeeService.getEmployeesInfo();
         model.addAttribute("totalEmployee", obj.get("totalEmployee"));
         model.addAttribute("employees", obj.get("employeeList"));
         model.addAttribute("empAggregateSalary", obj.get("empAggregateSalary"));
         model.addAttribute("companyAccBalance", this.companyBankAccInfoService.getAccountInfo().getCurBalance());
         return "/company/salary-disburse-process-form";
+    }
+
+    @PostMapping("/salary-disburse-process")
+    @ResponseBody
+    public JSONObject salaryDisbursementProcess(){
+        return this.companyBankAccInfoService.salaryDisburseProcess();
     }
 }

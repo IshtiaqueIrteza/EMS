@@ -43,7 +43,7 @@ CREATE TABLE `company_bank_acc_info` (
 
 LOCK TABLES `company_bank_acc_info` WRITE;
 /*!40000 ALTER TABLE `company_bank_acc_info` DISABLE KEYS */;
-INSERT INTO `company_bank_acc_info` VALUES (1,'Salary Disburse Account','86754641234','0','DBBL','Karwan Bazar Corporate',1007000.00);
+INSERT INTO `company_bank_acc_info` VALUES (1,'Salary Disburse Account','86754641234','0','DBBL','Karwan Bazar Corporate',9500.00);
 /*!40000 ALTER TABLE `company_bank_acc_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `emp_bank_acc_info` (
   UNIQUE KEY `EMP_ID_UNIQUE` (`EMP_ID`),
   CONSTRAINT `EMP_ID_FK` FOREIGN KEY (`EMP_ID`) REFERENCES `employee` (`EMP_ID`),
   CONSTRAINT `ACC_TYPE_CONST_chk` CHECK (((`ACC_TYPE` = _utf8mb4'0') or (`ACC_TYPE` = _utf8mb4'1')))
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `emp_bank_acc_info` (
 
 LOCK TABLES `emp_bank_acc_info` WRITE;
 /*!40000 ALTER TABLE `emp_bank_acc_info` DISABLE KEYS */;
-INSERT INTO `emp_bank_acc_info` VALUES (1,'nm','988888888','0','mnbnm','mnnmn',0.00,1011);
+INSERT INTO `emp_bank_acc_info` VALUES (1,'Grade_1_DummyEmployee_Account','8786543987118790','0','DBBL','Karwan Bazar Corporate Branch',486000.00,1001),(2,'Grade_2_DummyEmployee_Account','8786543987118799','0','DBBL','Karwan Bazar Corporate Branch',425250.00,1002),(3,'Grade_3_DummyEmployee_1_Account','8786643987118790','0','DBBL','Karwan Bazar Corporate Branch',364500.00,1003),(4,'Grade_3_DummyEmployee_2_Account','9786643987118790','0','DBBL','Karwan Bazar Corporate Branch',364500.00,1004),(5,'Grade_4_DummyEmployee_1_Account','8786643987818790','0','DBBL','Karwan Bazar Corporate Branch',303750.00,1005),(6,'Grade_4_DummyEmployee_2_Address','8786532987118790','0','DBBL','Karwan Bazar Corporate Branch',303750.00,1006),(7,'Grade_5_DummyEmployee_1_Account','8787992987118790','0','DBBL','Karwan Bazar Corporate Branch',243000.00,1007),(8,'Grade_5_DummyEmployee_2_Address','8786532987568790','0','DBBL','Karwan Bazar Corporate Branch',243000.00,1008),(9,'Grade_6_DummyEmployee_1_Account','8786532987561122','0','DBBL','Karwan Bazar Corporate Branch',182250.00,1009),(10,'Grade_6_DummyEmployee_2_Account','7786532987561122','0','DBBL','Karwan Bazar Corporate Branch',182250.00,1010);
 /*!40000 ALTER TABLE `emp_bank_acc_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `employee` (
   CONSTRAINT `EMP_ID_CONST` CHECK (((`EMP_ID` > 1000) and (`EMP_ID` < 10000))),
   CONSTRAINT `GRADE_CONST` CHECK (((`GRADE` >= _utf8mb4'1') and (`GRADE` <= _utf8mb4'6'))),
   CONSTRAINT `MOBILE_CONST` CHECK ((char_length(`MOBILE`) = 11))
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (2,1001,'uksafu','4','hjsfbd','01987777777'),(3,1002,'mn,m','3','jmnj','01888888888'),(4,1003,'sd','4','dfg','01777777777'),(5,1004,'sjkdfs','1','sjdf','01777777777'),(6,1005,'njsfdn','4','jnsndfj','01999999999'),(7,1006,'jdfkdf','3','jdxfdkf','01777777777'),(8,1007,'dsgd','2','dfg','01999999999'),(9,1008,'xdx','3','xcd','01888888888'),(10,1009,'dfgfg','3','cfbgfc','01888888888'),(11,1010,'hjbbj','4','bhjhb','01222222222'),(12,1011,'hjbbj','2','bhjhb','01222222222');
+INSERT INTO `employee` VALUES (13,1001,'Grade_1_DummyEmployee','1','Grade_1_DummyEmployee_Address','01754889876'),(14,1002,'Grade_2_DummyEmployee','2','Grade_2_DummyEmployee_Address','01754889870'),(15,1003,'Grade_3_DummyEmployee_1','3','Grade_3_DummyEmployee_1_Address','01954889170'),(16,1004,'Grade_3_DummyEmployee_2','3','Grade_3_DummyEmployee_2_Address','01954889178'),(17,1005,'Grade_4_DummyEmployee_1','4','Grade_4_DummyEmployee_1_Address','01854889178'),(18,1006,'Grade_4_DummyEmployee_2','4','Grade_4_DummyEmployee_2_Address','01854889170'),(19,1007,'Grade_5_DummyEmployee_1','5','Grade_5_DummyEmployee_1_Address','01854880178'),(20,1008,'Grade_5_DummyEmployee_2','5','Grade_5_DummyEmployee_2_Address','01354880178'),(21,1009,'Grade_6_DummyEmployee_1','6','Grade_6_DummyEmployee_1_Address','01354880179'),(22,1010,'Grade_6_DummyEmployee_2','6','Grade_6_DummyEmployee_2_Address','01884880179');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `employee_salary_by_grade` (
 
 LOCK TABLES `employee_salary_by_grade` WRITE;
 /*!40000 ALTER TABLE `employee_salary_by_grade` DISABLE KEYS */;
-INSERT INTO `employee_salary_by_grade` VALUES ('1',45900.00),('2',39150.00),('3',32400.00),('4',25650.00),('5',18900.00),('6',12150.00);
+INSERT INTO `employee_salary_by_grade` VALUES ('1',54000.00),('2',47250.00),('3',40500.00),('4',33750.00),('5',27000.00),('6',20250.00);
 /*!40000 ALTER TABLE `employee_salary_by_grade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,6 +211,98 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `salary_disburse_process` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `salary_disburse_process`()
+BEGIN
+	DECLARE company_balance decimal(19,2);
+	DECLARE employee_id int;
+	DECLARE employee_sal decimal(10,2);
+    DECLARE output varchar(1000) DEFAULT '';
+    
+    -- for dubug purpose
+    -- DECLARE errno INT;
+    -- DECLARE msg TEXT;
+        
+    -- cursor flag
+    DECLARE done INT DEFAULT FALSE;
+    
+    -- declare cursor for employee salary info
+	DECLARE curEmpSalInfo
+		CURSOR FOR
+			select a.EMP_ID, b.SALARY from employee a
+				inner join employee_salary_by_grade b on a.GRADE = b.GRADE_ID
+                order by b.GRADE_ID desc;
+                
+	-- declare NOT FOUND handler, for cursor
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+    BEGIN
+        ROLLBACK;
+		select '0' as msg;
+        -- Here the current DA is nonempty because no prior statements
+        -- executing within the handler have cleared it
+		/*GET CURRENT DIAGNOSTICS CONDITION 1
+		  errno = MYSQL_ERRNO, msg = MESSAGE_TEXT;
+		SELECT 'current DA before mapped insert' AS op, errno, msg;
+		GET STACKED DIAGNOSTICS CONDITION 1
+		  errno = MYSQL_ERRNO, msg = MESSAGE_TEXT;
+		SELECT 'stacked DA before mapped insert' AS op, errno, msg;*/
+    END;
+    
+    START TRANSACTION;
+    
+			-- comapny balance initial fetch
+			select CUR_BAL from company_bank_acc_info into company_balance;
+    
+			-- open cursor
+			OPEN curEmpSalInfo;
+    
+			iterate_resultset: LOOP
+			FETCH curEmpSalInfo INTO employee_id, employee_sal;
+			IF done OR (company_balance - employee_sal < 0) THEN
+				LEAVE iterate_resultset;
+			END IF;
+            
+			-- debit company main account
+                update company_bank_acc_info set cur_bal = cur_bal - employee_sal where acc_id = 1;
+                
+			-- credit employee salary account
+                update emp_bank_acc_info set cur_bal = cur_bal + employee_sal where emp_id = employee_id;
+                
+                set company_balance = company_balance - employee_sal;
+					
+				-- create output
+				set output = CONCAT(output, employee_id, ',');
+                
+			END LOOP iterate_resultset;
+            
+			CLOSE curEmpSalInfo;
+            
+            -- commit point
+            COMMIT;
+            
+            IF done THEN
+                select '1' as msg; -- all employee gets salary
+			ELSE
+				select output as msg; -- partial employee gets salary
+			END IF;
+            
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -221,4 +313,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-17 15:49:55
+-- Dump completed on 2020-12-18 21:59:21

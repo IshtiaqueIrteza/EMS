@@ -73,12 +73,19 @@
 
         </div>
 
+        <div class="form-group row">
+            <label for="cur_bal" class="col-sm-2 col-form-label"><h6 style="color: green">Current Balance = </h6></label>
+            <div class="col-sm-3">
+                <h6 id="cur_bal" th:text="${companyBankInfo.curBalance}"></h6>
+            </div>
+        </div><br>
+
         <form action="/company-utility/update-company-acc-bal" method="post">
             <div class="form-group row">
-                <label for="cur_bal" class="col-sm-2 col-form-label"><h5 style="color: green">Current Balance<span class="err_msg"> *</span></h5></label>
+                <label for="cr_amt" class="col-sm-3 col-form-label"><h5 style="color: green">Amount to Credit<span class="err_msg"> *</span></h5></label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control col-sm-5" id="cur_bal" name="bal-to-credit"
-                           placeholder="" th:value="${companyBankInfo.curBalance}" required>
+                    <input type="text" class="form-control col-sm-5" id="cr_amt" name="bal-to-credit"
+                           placeholder="Amount to Credit" required>
 <!--                    <span class="err_msg" id="err_cur_bal"></span>-->
                 </div>
             </div><br>

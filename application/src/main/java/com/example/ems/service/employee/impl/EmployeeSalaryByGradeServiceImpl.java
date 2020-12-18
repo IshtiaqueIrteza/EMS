@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -19,5 +20,10 @@ public class EmployeeSalaryByGradeServiceImpl implements EmployeeSalaryByGradeSe
     @Override
     public List<EmployeeSalaryByGrade> getList() {
         return this.employeeSalaryByGradeRepository.findAll();
+    }
+
+    @Override
+    public Optional<EmployeeSalaryByGrade> getLowestGradeBasicSalary() {
+        return this.employeeSalaryByGradeRepository.findById('6'); //lowest grade is 6
     }
 }

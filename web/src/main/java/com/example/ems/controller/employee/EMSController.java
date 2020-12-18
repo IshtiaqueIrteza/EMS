@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/employees")
@@ -27,6 +28,12 @@ public class EMSController {
     @GetMapping("/init-sal-calc")
     public String initialSalaryCalculation(){
         return "/employee/init-sal-calc-form";
+    }
+
+    @GetMapping("/get-lowest-grade-sal-basic")
+    @ResponseBody
+    public Optional<EmployeeSalaryByGrade> getLowestGradeBasicSalaryIfExists(){
+        return this.employeeSalaryByGradeService.getLowestGradeBasicSalary();
     }
 
     @PostMapping("/init-sal-calc")
@@ -49,7 +56,7 @@ public class EMSController {
 
     @GetMapping("/emp-salary-sheet")
     public String employeeSalarySheet(Model model){
-        model.addAttribute("employees", this.employeeService.getEmployees().get("employeeList"));
+        model.addAttribute("employees", this.employeeService.getEmployeesInfo().get("employeeList"));
         return "/employee/emp-salary-sheet";
     }
 

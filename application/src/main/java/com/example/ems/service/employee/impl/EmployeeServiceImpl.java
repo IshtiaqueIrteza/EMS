@@ -17,9 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @Override
-    public JSONObject getEmployees() {
-        List<Employee> employees = this.employeeRepository.findAll();
+    private JSONObject calculateEmployeesInfo(List<Employee> employees){
         int empAggregateSalary = 0;
         int employeeCount = 0;
 
@@ -34,6 +32,26 @@ public class EmployeeServiceImpl implements EmployeeService {
         obj.put("employeeList", employees);
 
         return obj;
+    }
+
+    @Override
+    public JSONObject getEmployeesInfo() {
+        return calculateEmployeesInfo(this.employeeRepository.findAll());
+    }
+
+    @Override
+    public List<Employee> getEmployeeList() {
+        return this.employeeRepository.findAll();
+    }
+
+    @Override
+    public JSONObject findAllByEmpId(List<Integer> empIds) {
+        return calculateEmployeesInfo(this.employeeRepository.findAllByEmpIdIn(empIds));
+    }
+
+    @Override
+    public JSONObject findAllByEmpIdNotIn(List<Integer> empIds) {
+        return calculateEmployeesInfo(this.employeeRepository.findAllByEmpIdNotIn(empIds));
     }
 
     @Override

@@ -12,6 +12,13 @@ $(document).ready(function () {
         return true;
     }
 
+    $.get("get-lowest-grade-sal-basic",
+        function (data, status) {
+        console.log(data);
+            let h4_tag_id = $("#current_lowest_grade_basic");
+            data == null ? h4_tag_id.text("Not Set").css("color", "red") : h4_tag_id.text(Math.ceil(data.salary/1.35)).css("color", "green");
+        });
+
     $(document).on("click", "#process_btn", function () {
 
         if(validate()){
