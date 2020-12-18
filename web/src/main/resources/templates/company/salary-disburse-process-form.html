@@ -35,14 +35,72 @@
             <div class="result-modal-content">
                 <div class="result-modal-header">
                     <span class="result-modal-close">&times;</span>
-                    <h2>Modal Header</h2>
+                    <h2>WARNING: INSUFFICIENT BALANCE</h2>
                 </div>
+                <h3 align="center" style="color: darkorange">Salary couldn't be processed due to insufficient balance. Check report below</h3>
+                <br>
+                <h3 align="center">Paid Employees</h3>
                 <div class="result-modal-body">
-                    <p>Some text in the Modal Body</p>
-                    <p>Some other text...</p>
+                    <div class="table-responsive">
+                        <table id="paid_employee_list" class="table table-bordered table-striped table-hover table-condensed container"
+                               style="width: 70%">
+                            <thead>
+                            <tr style="background-color: lightgreen; text-align: center">
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th>Salary</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+
+                            <tbody style="text-align: center">
+                            </tbody>
+                        </table>
+                    </div><br>
+                    <div class="form-group row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4">
+                            Total Paid Employees = <span id="total_paid_emp"></span>
+                        </div>
+                        <div class="col-sm-3">
+                            <label><h4>Total Paid Amount = </h4></label>
+                        </div>
+                        <div class="col-sm-3">
+                            <p id="total_paid_sal"></p>
+                        </div>
+                    </div><br><br>
+                    <h3 align="center">Remaining Employees</h3>
+                    <div class="table-responsive">
+                        <table id="unpaid_employee_list" class="table table-bordered table-striped table-hover table-condensed container"
+                               style="width: 70%">
+                            <thead>
+                            <tr style="background-color: red; text-align: center">
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th>Salary</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+
+                            <tbody style="text-align: center">
+                            </tbody>
+                        </table>
+                    </div><br>
+                    <div class="form-group row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4">
+                            Total Unpaid Employees = <span id="total_unpaid_emp"></span>
+                        </div>
+                        <div class="col-sm-3">
+                            <label><h4>Total Due Amount = </h4></label>
+                        </div>
+                        <div class="col-sm-3">
+                            <p id="total_unpaid_sal"></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="result-modal-footer">
-                    <h3>Modal Footer</h3>
+                    <h3>WARNING !!</h3>
                 </div>
             </div>
 

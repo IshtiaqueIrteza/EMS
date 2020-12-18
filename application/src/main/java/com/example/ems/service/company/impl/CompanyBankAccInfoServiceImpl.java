@@ -1,6 +1,7 @@
 package com.example.ems.service.company.impl;
 
 import com.example.ems.model.company.CompanyBankAccInfo;
+import com.example.ems.model.employee.Employee;
 import com.example.ems.repository.company.CompanyBankAccInfoRepository;
 import com.example.ems.service.company.CompanyBankAccInfoService;
 import com.example.ems.service.employee.EmployeeService;
@@ -73,6 +74,20 @@ public class CompanyBankAccInfoServiceImpl implements CompanyBankAccInfoService 
         }
     }*/
 
+    public StringBuilder buildEmployeePaymentStatusTable(List<Employee> employees, boolean status){
+        StringBuilder s = new StringBuilder();
+
+        for (Employee employee: employees) {
+            s.append("<tr>");
+            s.append("<td>" + employee.getEmpId() + "</td>");
+            s.append("<td>" + employee.getEmpName() + "</td>");
+            s.append("<td>" + employee.getEmployeeSalaryByGrade().getSalary() + "</td>");
+            s.append(status == true ? "<td>Paid</td></tr>" : "<td>Unpaid</td></tr>");
+        }
+
+        return s;
+    }
+
     @Override
     public JSONObject salaryDisburseProcess() {
 
@@ -92,10 +107,10 @@ public class CompanyBankAccInfoServiceImpl implements CompanyBankAccInfoService 
         }
         else{ //success partial
 
-            String[] empIds = res.split(",");
-
-            if(empIds.length != 0){
+            if(!res.equals("")){
                 //some employees gets salary
+
+                String[] empIds = res.split(",");
 
                 List<Integer> employeeIds = new ArrayList<>();
 
@@ -103,15 +118,40 @@ public class CompanyBankAccInfoServiceImpl implements CompanyBankAccInfoService 
                     employeeIds.add(Integer.parseInt(empId));
                 }
 
-                obj = employeeService.findAllByEmpId(employeeIds);
+                obj = employeeService.findAllByEmpId(employeeIds); //paid employees
+                List<Employee> employees = (List<Employee>) employeeService.findAllByEmpId(employeeIds).get("employeeList"); //paid employees
+
+                obj.remove("employeeList");
+                obj.put("tableHTMLPaid", buildEmployeePaymentStatusTable(employees, true));
+
                 obj.put("msg", "2");
-                obj.put("unpaidEmployees", employeeService.findAllByEmpIdNotIn(employeeIds));
+
+                JSONObject newObj = new JSONObject();
+                newObj = employeeService.findAllByEmpIdNotIn(employeeIds); //unpaid employees
+
+//                obj.put("unpaidEmployees", employeeService.findAllByEmpIdNotIn(employeeIds)); //unpaid employees
+
+                employees = (List<Employee>) newObj.get("employeeList"); //unpaid employees
+                newObj.remove("employeeList");
+                obj.put("tableHTMLUnpaid", buildEmployeePaymentStatusTable(employees, false));
+
+                obj.put("unpaidEmpInfo", newObj);
             }
             else
             {
                 //company balance is too short, none of the employees gets salary
-                obj = employeeService.getEmployeesInfo();
+                String link = "<div class=\"form-group row\">\n" +
+                        "            <div class=\"col-sm-2\"></div>\n" +
+                        "            <div class=\"col-sm-9\"><h5 style=\"color: red\">For insufficient balance, no employees can be paid ! Please credit balance from link below</h5></div>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"form-group row\">\n" +
+                        "            <div class=\"col-sm-5\"></div>\n" +
+                        "            <div class=\"col-sm-7\">\n" +
+                        "                <a class=\"btn btn-link\" href=\"/company-utility/bank-acc-info\">Credit Company Account</a>\n" +
+                        "            </div>\n" +
+                        "        </div>";
                 obj.put("msg", "3");
+                obj.put("data", link);
             }
         }
 

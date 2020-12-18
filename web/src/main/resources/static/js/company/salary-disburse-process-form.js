@@ -41,11 +41,18 @@ $(document).ready(function () {
                             }
                             else if(response.msg == "2"){
                                 showAlertByType("Insufficient Balance !", 'W');
-                                //do stuff
+                                $("#paid_employee_list tbody").append(response.tableHTMLPaid);
+                                $("#total_paid_sal").append(response.empAggregateSalary);
+                                $("#total_paid_emp").append(response.totalEmployee);
+                                $("#unpaid_employee_list tbody").append(response.tableHTMLUnpaid);
+                                $("#total_unpaid_sal").append(response.unpaidEmpInfo.empAggregateSalary);
+                                $("#total_unpaid_emp").append(response.unpaidEmpInfo.totalEmployee);
+                                display_result();
                             }
                             else if(response.msg == "3"){
-                                //do stuff
                                 showAlertByType("Insufficient Balance !", 'W');
+                                $(".result-modal-body").append(response.data);
+                                display_result();
                             }
                         },
                         error: function(xhr, status, error) {
