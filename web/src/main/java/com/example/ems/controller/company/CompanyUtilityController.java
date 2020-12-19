@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/company-utility")
 public class CompanyUtilityController {
@@ -18,6 +20,9 @@ public class CompanyUtilityController {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    HttpSession session;
 
     @GetMapping("/bank-acc-info")
     public String displayCompanyBankBalanceInfo(Model model){
@@ -37,6 +42,16 @@ public class CompanyUtilityController {
         return "redirect:/company-utility/bank-acc-info";
     }
 
+    @PostMapping("/update-company-acc-bal-req")
+    @ResponseBody
+    public double updateCompanyAccountBalanceAjax(@RequestParam double balanceToCredit){
+        int rowUpdated = this.companyBankAccInfoService.updateAccountBalance(balanceToCredit);
+        if(rowUpdated == 1)
+            return this.companyBankAccInfoService.getAccountInfo().getCurBalance();
+        else
+            return 0;
+    }
+
     @GetMapping("/salary-disburse")
     public String salaryDisbursementProcessForm(Model model){
         JSONObject obj = this.employeeService.getEmployeesInfo();
@@ -50,6 +65,8 @@ public class CompanyUtilityController {
     @PostMapping("/salary-disburse-process")
     @ResponseBody
     public JSONObject salaryDisbursementProcess(){
-        return this.companyBankAccInfoService.salaryDisburseProcess();
+        Object obj = session.getAttribute("unpaidEmpIds");
+        String empIdsStr = obj == null ? "" : obj.toString();
+        return this.companyBankAccInfoService.salaryDisburseProcess(empIdsStr); //unpaid empIds
     }
 }

@@ -15,4 +15,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     int deleteByEmpId(int empId);
     @Query(value = "select max(EMP_ID) from employee", nativeQuery = true)
     Integer getMaxEmpId();
+    @Query(value = "select EMP_ID from employee", nativeQuery = true)
+    List<Integer> getEmployeeIds();
+    @Query(value = "select sum(b.SALARY) from employee a\n" +
+            "inner join employee_salary_by_grade b on a.GRADE = b.GRADE_ID", nativeQuery = true)
+    Double totalSalary();
+    /*@Query(value = "select count(EMP_ID) from employee", nativeQuery = true)
+    Long employeeCount();*/
 }

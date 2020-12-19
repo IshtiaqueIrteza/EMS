@@ -8,6 +8,9 @@ import java.util.List;
 public interface EmployeeService {
     JSONObject getEmployeesInfo();
     List<Employee> getEmployeeList();
+    List<Integer> getEmployeeIds();
+    Double totalSalary();
+    Long employeeCount();
     JSONObject findAllByEmpId(List<Integer> empIds);
     JSONObject findAllByEmpIdNotIn(List<Integer> empIds);
     Employee getEmployee(int empId);

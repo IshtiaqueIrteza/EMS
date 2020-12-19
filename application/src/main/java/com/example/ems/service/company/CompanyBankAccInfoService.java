@@ -7,5 +7,5 @@ public interface CompanyBankAccInfoService {
     int updateAccountBalance(double balanceToCredit); //only one account
     CompanyBankAccInfo getAccountInfo();
 //    char salaryDisburseProcess(); //write procedure later
-    JSONObject salaryDisburseProcess();
+    JSONObject salaryDisburseProcess(String empIdsStr); //comma separated for SP
 }

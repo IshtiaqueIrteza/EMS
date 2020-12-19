@@ -43,7 +43,7 @@ CREATE TABLE `company_bank_acc_info` (
 
 LOCK TABLES `company_bank_acc_info` WRITE;
 /*!40000 ALTER TABLE `company_bank_acc_info` DISABLE KEYS */;
-INSERT INTO `company_bank_acc_info` VALUES (1,'Salary Disburse Account','86754641234','0','DBBL','Karwan Bazar Corporate',9500.00);
+INSERT INTO `company_bank_acc_info` VALUES (1,'Salary Disburse Account','86754641234','0','DBBL','Karwan Bazar Corporate',0.00);
 /*!40000 ALTER TABLE `company_bank_acc_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +76,7 @@ CREATE TABLE `emp_bank_acc_info` (
 
 LOCK TABLES `emp_bank_acc_info` WRITE;
 /*!40000 ALTER TABLE `emp_bank_acc_info` DISABLE KEYS */;
-INSERT INTO `emp_bank_acc_info` VALUES (1,'Grade_1_DummyEmployee_Account','8786543987118790','0','DBBL','Karwan Bazar Corporate Branch',486000.00,1001),(2,'Grade_2_DummyEmployee_Account','8786543987118799','0','DBBL','Karwan Bazar Corporate Branch',425250.00,1002),(3,'Grade_3_DummyEmployee_1_Account','8786643987118790','0','DBBL','Karwan Bazar Corporate Branch',364500.00,1003),(4,'Grade_3_DummyEmployee_2_Account','9786643987118790','0','DBBL','Karwan Bazar Corporate Branch',364500.00,1004),(5,'Grade_4_DummyEmployee_1_Account','8786643987818790','0','DBBL','Karwan Bazar Corporate Branch',303750.00,1005),(6,'Grade_4_DummyEmployee_2_Address','8786532987118790','0','DBBL','Karwan Bazar Corporate Branch',303750.00,1006),(7,'Grade_5_DummyEmployee_1_Account','8787992987118790','0','DBBL','Karwan Bazar Corporate Branch',243000.00,1007),(8,'Grade_5_DummyEmployee_2_Address','8786532987568790','0','DBBL','Karwan Bazar Corporate Branch',243000.00,1008),(9,'Grade_6_DummyEmployee_1_Account','8786532987561122','0','DBBL','Karwan Bazar Corporate Branch',182250.00,1009),(10,'Grade_6_DummyEmployee_2_Account','7786532987561122','0','DBBL','Karwan Bazar Corporate Branch',182250.00,1010);
+INSERT INTO `emp_bank_acc_info` VALUES (1,'Grade_1_DummyEmployee_Account','8786543987118790','0','DBBL','Karwan Bazar Corporate Branch',0.00,1001),(2,'Grade_2_DummyEmployee_Account','8786543987118799','0','DBBL','Karwan Bazar Corporate Branch',0.00,1002),(3,'Grade_3_DummyEmployee_1_Account','8786643987118790','0','DBBL','Karwan Bazar Corporate Branch',0.00,1003),(4,'Grade_3_DummyEmployee_2_Account','9786643987118790','0','DBBL','Karwan Bazar Corporate Branch',0.00,1004),(5,'Grade_4_DummyEmployee_1_Account','8786643987818790','0','DBBL','Karwan Bazar Corporate Branch',0.00,1005),(6,'Grade_4_DummyEmployee_2_Address','8786532987118790','0','DBBL','Karwan Bazar Corporate Branch',0.00,1006),(7,'Grade_5_DummyEmployee_1_Account','8787992987118790','0','DBBL','Karwan Bazar Corporate Branch',0.00,1007),(8,'Grade_5_DummyEmployee_2_Address','8786532987568790','0','DBBL','Karwan Bazar Corporate Branch',0.00,1008),(9,'Grade_6_DummyEmployee_1_Account','8786532987561122','0','DBBL','Karwan Bazar Corporate Branch',0.00,1009),(10,'Grade_6_DummyEmployee_2_Account','7786532987561122','0','DBBL','Karwan Bazar Corporate Branch',0.00,1010);
 /*!40000 ALTER TABLE `emp_bank_acc_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +221,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `salary_disburse_process`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `salary_disburse_process`(in emp_ids varchar(1000))
 BEGIN
 	DECLARE company_balance decimal(19,2);
 	DECLARE employee_id int;
@@ -240,6 +240,7 @@ BEGIN
 		CURSOR FOR
 			select a.EMP_ID, b.SALARY from employee a
 				inner join employee_salary_by_grade b on a.GRADE = b.GRADE_ID
+                where FIND_IN_SET (emp_id, emp_ids)
                 order by b.GRADE_ID desc;
                 
 	-- declare NOT FOUND handler, for cursor
@@ -313,4 +314,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-18 21:59:21
+-- Dump completed on 2020-12-20  4:29:19

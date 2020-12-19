@@ -45,6 +45,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<Integer> getEmployeeIds() {
+        return this.employeeRepository.getEmployeeIds();
+    }
+
+    @Override
+    public Double totalSalary() {
+        return this.employeeRepository.totalSalary();
+    }
+
+    @Override
+    public Long employeeCount() {
+        return this.employeeRepository.count();
+    }
+
+    @Override
     public JSONObject findAllByEmpId(List<Integer> empIds) {
         return calculateEmployeesInfo(this.employeeRepository.findAllByEmpIdIn(empIds));
     }
