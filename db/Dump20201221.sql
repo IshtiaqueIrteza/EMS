@@ -65,9 +65,9 @@ CREATE TABLE `emp_bank_acc_info` (
   `EMP_ID` int NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `EMP_ID_UNIQUE` (`EMP_ID`),
-  CONSTRAINT `EMP_ID_FK` FOREIGN KEY (`EMP_ID`) REFERENCES `employee` (`EMP_ID`),
+  CONSTRAINT `FK_EMP_ID` FOREIGN KEY (`EMP_ID`) REFERENCES `employee` (`EMP_ID`),
   CONSTRAINT `ACC_TYPE_CONST_chk` CHECK (((`ACC_TYPE` = _utf8mb4'0') or (`ACC_TYPE` = _utf8mb4'1')))
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,13 +95,13 @@ CREATE TABLE `employee` (
   `ADDRESS` varchar(150) NOT NULL,
   `MOBILE` char(11) NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `Employee_ID_UNIQUE` (`EMP_ID`),
+  UNIQUE KEY `EMP_ID_UNIQUE` (`EMP_ID`),
   KEY `FKl021ytasfcjoqcc3qi8h7mkv8` (`GRADE`),
   CONSTRAINT `FKl021ytasfcjoqcc3qi8h7mkv8` FOREIGN KEY (`GRADE`) REFERENCES `employee_salary_by_grade` (`GRADE_ID`),
   CONSTRAINT `EMP_ID_CONST` CHECK (((`EMP_ID` > 1000) and (`EMP_ID` < 10000))),
   CONSTRAINT `GRADE_CONST` CHECK (((`GRADE` >= _utf8mb4'1') and (`GRADE` <= _utf8mb4'6'))),
   CONSTRAINT `MOBILE_CONST` CHECK ((char_length(`MOBILE`) = 11))
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,4 +314,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-20  4:29:19
+-- Dump completed on 2020-12-21  5:49:55

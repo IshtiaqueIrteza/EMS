@@ -169,4 +169,100 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on("click", "#update_emp_mst", function () {
+
+        if(validateEmpMaster()){
+
+            $.confirm({
+                title: 'Confirm',
+                content: 'Are you sure?',
+                buttons: {
+                    ok: function () {
+
+                        let empBasicInfo = {};
+                        empBasicInfo.empName = $.trim($("#emp_nm").val());
+                        empBasicInfo.grade = $.trim($("#emp_grade").val());
+                        empBasicInfo.address = $.trim($("#emp_add").val());
+                        empBasicInfo.mobile = $.trim($("#emp_mb").val());
+
+                        $.ajax({
+                            contentType: 'application/json',
+                            url:  "/api/employees/" + $.trim($("#emp_id").val()),
+                            type: 'PUT',
+                            data: JSON.stringify(empBasicInfo),
+                            dataType: 'json',
+                            success: function(response) {
+
+                                if(response != 0){
+                                    $("#emp_id").val(response);
+                                    $("#basic_info_div :input").prop('disabled',true);
+                                    $("#display_emp_id").text(response);
+                                    $("#acc_info_div").show();
+                                    showAlertByType("Employee Updated successfully", 'S');
+                                }
+                                else{
+                                    showAlertByType("Something went wrong ! Please try again", 'F');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                showAlertByType("Something went wrong !!", 'F');
+                            }
+                        });
+
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+        }
+    });
+
+    $(document).on("click", "#update_emp_dtl", function () {
+
+        if(validateEmpDtl()){
+
+            $.confirm({
+                title: 'Confirm',
+                content: 'Are you sure?',
+                buttons: {
+                    ok: function () {
+
+                        let empAccInfo = {};
+                        empAccInfo.accName = $.trim($("#acc_name").val());
+                        empAccInfo.accNum = $.trim($("#acc_num").val());
+                        empAccInfo.accType = $.trim($("#acc_tp").val());
+                        empAccInfo.bankName = $.trim($("#bank_nm").val());
+                        empAccInfo.branchName = $.trim($("#br_nm").val());
+
+                        $.ajax({
+                            contentType: 'application/json',
+                            url:  "/api/employees/" + $.trim($("#emp_id").val()) + "/details",
+                            type: 'PUT',
+                            data: JSON.stringify(empAccInfo),
+                            dataType: 'json',
+                            success: function(response) {
+
+                                if(response != '0'){
+                                    showAlertByType("Employee bank info Updated successfully", 'S');
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1500);
+                                }
+                                else{
+                                    showAlertByType("Something went wrong ! Please try again", 'F');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                showAlertByType("Something went wrong !!", 'F');
+                            }
+                        });
+
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+        }
+    });
+
 });

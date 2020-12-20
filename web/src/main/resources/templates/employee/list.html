@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="/common/layout/base">
+<head>
+</head>
+
+<body layout:fragment="content">
+
+<div class="container">
+    <div class="x_panel">
+
+        <br><br>
+        <div class="form-group row" align="center">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-6">
+                <label><h3>Employee List</h3></label>
+            </div>
+        </div><br>
+
+        <div class="table-responsive">
+            <table id="emp-list-mst" class="table table-bordered table-striped table-hover table-condensed container">
+                <thead>
+                <tr style="background-color: whitesmoke; text-align: center">
+                    <th style="display: none"></th>
+                    <th>Name</th>
+                    <th>Grade</th>
+                    <th>Salary</th>
+                    <th>Address</th>
+                    <th>Mobile</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+
+                <tbody style="text-align: center">
+                <tr th:each="employee: ${employees}">
+                    <td th:text="${employee.empId}" style="display: none"></td>
+                    <td th:text="${employee.empName}"></td>
+                    <td th:text="${employee.grade}"></td>
+                    <td th:text="${employee.employeeSalaryByGrade.salary}"></td>
+                    <td th:text="${employee.address}"></td>
+                    <td th:text="${employee.mobile}"></td>
+                    <td style="text-align:center;vertical-align: middle;"><a th:href="'edit/' + ${employee.empId}" id="btn_edit" type="button" class="btn fa fa-edit" style="text-align:center;vertical-align: middle;font-size:20px;"></a></td>
+                    <td style="text-align:center;vertical-align: middle;"><button id="btn_dlt" type="button" class="btn fa fa-trash" style="text-align:center;vertical-align: middle;font-size:20px;color:red;"></button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+<!--Script-->
+<div layout:fragment="script">
+        <script src="/js/employee/list.js"></script>
+</div>
+
+<div layout:fragment="css">
+
+</div>
+
+</html>

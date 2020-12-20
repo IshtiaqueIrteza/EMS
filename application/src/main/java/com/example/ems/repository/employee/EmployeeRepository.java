@@ -20,6 +20,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "select sum(b.SALARY) from employee a\n" +
             "inner join employee_salary_by_grade b on a.GRADE = b.GRADE_ID", nativeQuery = true)
     Double totalSalary();
-    /*@Query(value = "select count(EMP_ID) from employee", nativeQuery = true)
-    Long employeeCount();*/
+    @Query(value = "select a.EMP_NAME, b.GRADE_ID, b.SALARY, c.CUR_BAL from employee a\n" +
+            "inner join employee_salary_by_grade b on a.GRADE = b.GRADE_ID\n" +
+            "inner join emp_bank_acc_info c on a.EMP_ID = c.EMP_ID", nativeQuery = true)
+    List<Object[]> employeeReport();
 }

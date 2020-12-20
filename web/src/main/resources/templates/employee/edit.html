@@ -17,15 +17,9 @@
         <br>
         <div id="basic_info_div">
             <div class="form-group row">
-                <div class="col-sm-4"></div>
+                <div class="col-sm-5"></div>
                 <div class="col-sm-6">
-                    <a class="btn btn-link" href="/employees/emp-salary-sheet" target="_blank">Employee Salary Sheet</a>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-6">
-                    <a class="btn btn-link" href="/employees/list" target="_blank">Employee List</a>
+                    <a class="btn btn-link" href="/employees/list">Back To List</a>
                 </div>
             </div><br>
             <div class="form-group row">
@@ -40,7 +34,7 @@
                 <label for="emp_nm" class="col-sm-2 col-form-label"><h5>Employee Name<span class="err_msg"> *</span></h5></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control col-sm-5" id="emp_nm"
-                           placeholder="Name">
+                           placeholder="Name" th:value="${employees.empName}">
                     <span class="err_msg" id="err_emp_nm"></span>
                 </div>
                 <div class="col-sm-1"></div>
@@ -54,6 +48,8 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
+                        <!--<option th:each="i : ${#numbers.sequence(1, 6)}" th:value="${i}" th:text="${i}"
+                                th:selected="${employees.grade}"></option>-->
                     </select>
                     <span class="err_msg" id="err_emp_grade"></span>
                 </div>
@@ -64,35 +60,35 @@
                 <label for="emp_add" class="col-sm-2 col-form-label"><h5>Address<span class="err_msg"> *</span></h5></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control col-sm-5" id="emp_add"
-                           placeholder="Address">
+                           placeholder="Address" th:value="${employees.address}">
                     <span class="err_msg" id="err_emp_add"></span>
                 </div>
                 <div class="col-sm-1"></div>
                 <label for="emp_mb" class="col-sm-2 col-form-label"><h5>Mobile<span class="err_msg"> *</span></h5></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control col-sm-5" id="emp_mb"
-                           placeholder="ex: 01784556312">
+                           placeholder="ex: 01784556312" th:value="${employees.mobile}">
                     <span class="err_msg" id="err_emp_mb"></span>
                 </div>
             </div><br>
 
             <div class="form-group row">
                 <div class="col-sm-3">
-                    <button id="save_emp_btn" class="btn btn-success">Save</button>
+                    <button id="update_emp_mst" class="btn btn-success">Update</button>
                 </div>
             </div>
         </div>
 
         <div id="acc_info_div" style="display: none">
-            <input type="hidden" id="emp_id">
+            <input type="hidden" id="emp_id" th:value="${employees.empId}">
             <br>
             <div class="form-group row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-8">
                     <label><h3>Employee Detail [Bank Account]</h3></label><br>
-<!--                    <label><h3>Employee ID = </h3><h4 id="display_emp_id"></h4></label>-->
+                    <!--                    <label><h3>Employee ID = </h3><h4 id="display_emp_id"></h4></label>-->
                     <label for="display_emp_id"><b><span>Employee ID = </span>
-                        <span id="display_emp_id" style="color: green"></span></b></label>
+                        <span id="display_emp_id" style="color: green" th:text="${employees.empId}"></span></b></label>
                 </div>
             </div><br>
 
@@ -101,14 +97,14 @@
                 <label for="bank_nm" class="col-sm-2 col-form-label"><h5>Bank Name<span class="err_msg"> *</span></h5></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control col-sm-5" id="bank_nm"
-                           placeholder="Bank">
+                           placeholder="Bank" th:value="${employeeDetails.bankName}">
                     <span class="err_msg" id="err_bank_nm"></span>
                 </div>
                 <div class="col-sm-1"></div>
                 <label for="br_nm" class="col-sm-3 col-form-label"><h5>Branch Name<span class="err_msg"> *</span></h5></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control col-sm-5" id="br_nm"
-                           placeholder="Branch">
+                           placeholder="Branch" th:value="${employeeDetails.branchName}">
                     <span class="err_msg" id="err_br_nm"></span>
                 </div>
             </div><br>
@@ -118,14 +114,14 @@
                 <label for="acc_name" class="col-sm-2 col-form-label"><h5>Account Name<span class="err_msg"> *</span></h5></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control col-sm-5" id="acc_name"
-                           placeholder="Account Name">
+                           placeholder="Account Name" th:value="${employeeDetails.accName}">
                     <span class="err_msg" id="err_acc_name"></span>
                 </div>
                 <div class="col-sm-1"></div>
                 <label for="acc_num" class="col-sm-3 col-form-label"><h5>Account Number<span class="err_msg"> *</span></h5></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control col-sm-5" id="acc_num"
-                           placeholder="Account Number">
+                           placeholder="Account Number" th:value="${employeeDetails.accNum}">
                     <span class="err_msg" id="err_acc_num"></span>
                 </div>
             </div><br>
@@ -137,6 +133,8 @@
                         <option value="-1">-- Select Type --</option>
                         <option value="0">Current</option>
                         <option value="1">Savings</option>
+                        <!--<option th:each="i : ${#numbers.sequence(0, 1)}" th:value="${i}" th:text="${i} == 0 ? 'Current' : 'Savings'"
+                                th:selected="${i} == ${employeeDetails.accType}"></option>-->
                     </select>
                     <span class="err_msg" id="err_acc_tp"></span>
                 </div>
@@ -144,7 +142,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-3">
-                    <button id="save_dtl_btn" class="btn btn-success">Save</button>
+                    <button id="update_emp_dtl" class="btn btn-success">Update</button>
                 </div>
             </div>
 

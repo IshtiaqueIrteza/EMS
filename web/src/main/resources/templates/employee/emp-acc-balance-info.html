@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="/common/layout/base">
+<head>
+</head>
+
+<body layout:fragment="content">
+
+<div class="container">
+    <div class="x_panel">
+
+        <br><br>
+        <div class="form-group row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-6">
+                <label><h3>Employee Account Balance Info</h3></label>
+            </div>
+        </div><br>
+
+        <div class="table-responsive">
+            <table id="salary-by-grade-list" class="table table-bordered table-striped table-hover table-condensed container"
+                   style="width: 70%">
+                <thead>
+                <tr style="background-color: lightblue; text-align: center">
+                    <th>Name</th>
+                    <th>Grade</th>
+                    <th>Salary</th>
+                    <th>Current Account Balance</th>
+                </tr>
+                </thead>
+
+                <tbody style="text-align: center">
+                <tr th:each="employee: ${employees}">
+                    <td th:text="${employee[0]}"></td>
+                    <td th:text="${employee[1]}"></td>
+                    <td th:text="${employee[2]}"></td>
+                    <td th:text="${employee[3]}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+<!--Script-->
+<div layout:fragment="script">
+    <!--    <script src="/js/employee/init-sal-calc-form.js"></script>-->
+</div>
+
+<div layout:fragment="css">
+
+</div>
+
+</html>

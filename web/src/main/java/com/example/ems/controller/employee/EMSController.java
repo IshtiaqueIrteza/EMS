@@ -2,6 +2,7 @@ package com.example.ems.controller.employee;
 
 import com.example.ems.model.employee.EmployeeSalaryByGrade;
 import com.example.ems.service.employee.EMSProcessService;
+import com.example.ems.service.employee.EmployeeBankAccInfoService;
 import com.example.ems.service.employee.EmployeeSalaryByGradeService;
 import com.example.ems.service.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class EMSController {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    EmployeeBankAccInfoService employeeBankAccInfoService;
 
     @GetMapping("/init-sal-calc")
     public String initialSalaryCalculation(){
@@ -58,6 +62,25 @@ public class EMSController {
     public String employeeSalarySheet(Model model){
         model.addAttribute("employees", this.employeeService.getEmployeesInfo().get("employeeList"));
         return "/employee/emp-salary-sheet";
+    }
+
+    @GetMapping("/emp-acc-balance")
+    public String employeeBankAccInfo(Model model){
+        model.addAttribute("employees", this.employeeService.employeeReport());
+        return "/employee/emp-acc-balance-info";
+    }
+
+    @GetMapping("/list")
+    public String employeeCRUDForm(Model model){
+        model.addAttribute("employees", this.employeeService.getEmployeeList());
+        return "/employee/list";
+    }
+
+    @GetMapping("/edit/{employeeId}")
+    public String employeeEditForm(@PathVariable Integer employeeId, Model model){
+        model.addAttribute("employees", this.employeeService.getEmployee(employeeId));
+        model.addAttribute("employeeDetails", this.employeeBankAccInfoService.getByEmpId(employeeId));
+        return "/employee/edit";
     }
 
 }

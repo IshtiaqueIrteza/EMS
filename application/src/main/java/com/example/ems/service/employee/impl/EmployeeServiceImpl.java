@@ -1,6 +1,7 @@
 package com.example.ems.service.employee.impl;
 
 import com.example.ems.model.employee.Employee;
+import com.example.ems.repository.employee.EmployeeBankAccInfoRepository;
 import com.example.ems.repository.employee.EmployeeRepository;
 import com.example.ems.service.employee.EmployeeService;
 import org.json.simple.JSONObject;
@@ -16,6 +17,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    EmployeeBankAccInfoRepository employeeBankAccInfoRepository;
 
     private JSONObject calculateEmployeesInfo(List<Employee> employees){
         int empAggregateSalary = 0;
@@ -47,6 +51,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Integer> getEmployeeIds() {
         return this.employeeRepository.getEmployeeIds();
+    }
+
+    @Override
+    public List<Object[]> employeeReport() {
+        return this.employeeRepository.employeeReport();
     }
 
     @Override
@@ -87,7 +96,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public int updateEmployee(Employee employee) {
+        try{
+            Employee employeeToUpdate = this.employeeRepository.findByEmpId(employee.getEmpId());
+            employeeToUpdate.setEmpName(employee.getEmpName());
+            employeeToUpdate.setGrade(employee.getGrade());
+            employeeToUpdate.setAddress(employee.getAddress());
+            employeeToUpdate.setMobile(employee.getMobile());
+            return this.employeeRepository.save(employeeToUpdate).getEmpId();
+        }
+        catch (Exception ex){
+            return 0;
+        }
+    }
+
+    @Override
     public int deleteEmployee(int empId) {
-        return this.employeeRepository.deleteByEmpId(empId);
+        try{
+            this.employeeBankAccInfoRepository.deleteByEmpId(empId);
+            this.employeeRepository.deleteByEmpId(empId);
+            return 1;
+        }
+        catch (Exception ex){
+            return 0;
+        }
     }
 }

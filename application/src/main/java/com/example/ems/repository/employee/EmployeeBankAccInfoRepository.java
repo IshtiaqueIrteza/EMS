@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmployeeBankAccInfoRepository extends JpaRepository<EmployeeBankAccInfo, Long> {
+    int deleteByEmpId(int empId);
+    EmployeeBankAccInfo findByEmpId(Integer empId);
 }
