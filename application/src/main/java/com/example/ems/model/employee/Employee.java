@@ -24,6 +24,10 @@ public class Employee {
     @JoinColumn(name = "GRADE", referencedColumnName = "GRADE_ID", insertable = false, updatable = false)
     private EmployeeSalaryByGrade employeeSalaryByGrade; // fetch salary
 
+    /*@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "EMP_ID", referencedColumnName = "EMP_ID")
+    private EmployeeBankAccInfo employeeBankAccInfo; // bank info*/
+
     @Column(name = "GRADE")
     private char grade;
 
